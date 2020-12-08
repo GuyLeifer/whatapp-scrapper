@@ -6,24 +6,17 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "development": "node_modules/.bin/sequelize db:create && node_modules/.bin/sequelize db:migrate && node_modules/.bin/sequelize db:seed:all && nodemon index.js",
-    "restart": "node_modules/.bin/sequelize db:drop && node_modules/.bin/sequelize db:create && node_modules/.bin/sequelize db:migrate && node_modules/.bin/sequelize db:seed:all && nodemon index.js",
-    "db:migrate": "node_modules/.bin/sequelize db:migrate",
-    "db:seed": "node_modules/.bin/sequelize db:seed:all",
-    "db:create": "node_modules/.bin/sequelize db:create",
-    "db:drop": "node_modules/.bin/sequelize db:drop",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "moment": "^2.29.1",
-    "mysql2": "^2.2.5",
+    "mongoose": "^5.11.4",
     "puppeteer": "^5.5.0",
-    "sequelize": "^6.3.5",
-    "sequelize-cli": "^6.2.0",
     "whatsapp-chat-parser": "^3.0.2"
   },
   "devDependencies": {
