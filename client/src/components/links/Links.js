@@ -45,7 +45,7 @@ function Links() {
                         <div className="dateLink">{link.date.slice(0, 10)}</div>
                         <div>
                             {/* {link.links.map(lin => <span className="link">{lin}</span>)} */}
-                            <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>)
+                            <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
                         </div>
                         <div className="authorLink">{link.author}</div>
                     </div> 
@@ -55,7 +55,7 @@ function Links() {
                         <div className="dateLink">{link.date.slice(0, 10)}</div>
                         <div>
                             {/* {link.links.map(lin => <span className="link">{lin}</span>)} */}
-                            <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>)
+                            <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
                         </div>
                         <div className="authorLink">{link.author}</div>
                     </div>           

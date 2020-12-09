@@ -17,10 +17,10 @@
     cursor: pointer;
 }
 .linkAnchor {
-    color: blue;
+    color: #25D366;
 }
 .chosen {
-    color: lightslategray;
+    color: #25D366;
     font-size: 200%;
     text-decoration: underline;
 }
