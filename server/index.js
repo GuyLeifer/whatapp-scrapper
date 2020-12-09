@@ -6,7 +6,7 @@ const port = process.env.PORT;
 
 app.listen(port, () => {
     console.log(`app listening at http://localhost:${port}`)
-    scraper()
+    // scraper()
     // setInterval(function() {
     //     scraper()
     // }, 2 * 60 * 1000);

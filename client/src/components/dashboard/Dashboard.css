@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gloria+Hallelujah&family=Gochi+Hand&family=Permanent+Marker&display=swap');
+
+.chart {
+    font-family: 'Bebas Neue', cursive;
+    /* color: lightslategray; */
+}
+.firstLine {
+    display: flex;
+    justify-content: space-around;
+}
+.recharts-wrapper {
+    margin : 0 auto;
+}

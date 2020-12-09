@@ -43,7 +43,6 @@ function scraper() {
     // npm package
     const linksBlackList = [
         'zoom.us',
-        'linkedin.com/in'
     ]
     
     let id = 1;
@@ -53,8 +52,8 @@ function scraper() {
     // console.log('messages', messages)
             const linksByDates = messages.reduce((dates, messageObject) => {
                 const day = moment(messageObject.date).format('YYYY-MM-DD')
-                let { message, author } = messageObject;
-                const linksObjects = urlify(message).filter((link) => {
+                const { message, author } = messageObject;
+                const linksObjects = urlify(message).filter(([link]) => {
                     return !linksBlackList.find((blackLink) => link.includes(blackLink))
                 })
                 if (linksObjects.length) {
@@ -69,8 +68,8 @@ function scraper() {
                 return dates;
             }, {})
         
-            // fs.writeFileSync('./chat.json', JSON.stringify(messages))
-            // fs.writeFileSync('./links-by-dates.json', JSON.stringify(linksByDates))
+            fs.writeFileSync('./chat.json', JSON.stringify(messages))
+            fs.writeFileSync('./links-by-dates.json', JSON.stringify(linksByDates))
 
             // linksByDates.forEach(async function(link) {
             //     console.log("in")

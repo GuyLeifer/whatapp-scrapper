@@ -1,0 +1,15 @@
+.navbar {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: lightslategray;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.navIcon {
+    height: 60px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 20%;
+}

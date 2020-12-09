@@ -1,0 +1,16 @@
+.header {
+    text-align: center;
+    text-decoration-line: underline;
+    font-size: 150%;
+    color: lightslategray;
+}
+.whatsappIcon {
+    height: 80px;
+    margin: 20px;
+    /* border-radius: 50%; */
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
