@@ -1,0 +1,21 @@
+.loginIcons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 40px;
+}
+.loginIcon {
+    height: 60px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: white;
+    margin: 10px;
+}
+.loginIcon:hover {
+    height: 60px;
+    border-radius: 20%;
+    background: black;
+}
+p {
+    font-size: 80%;
+}

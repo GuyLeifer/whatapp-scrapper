@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@800&display=swap');
 .header {
     text-align: center;
     text-decoration-line: underline;
     font-size: 150%;
     color: #25D366;
+    font-family: 'BioRhyme', serif;
 }
 .whatsappIcon {
     height: 80px;

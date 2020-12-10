@@ -7,14 +7,17 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",
     "axios": "^0.21.0",
+    "bootstrap": "^4.5.3",
+    "firebase": "^8.1.2",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "recharts": "^1.8.5",
     "web-vitals": "^0.2.4"
   },
-  "proxy": "http://server-whatapp-scraper:8001/",
+  "proxy": "http://localhost:8001/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

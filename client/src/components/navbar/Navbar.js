@@ -8,6 +8,7 @@ import Searchbar from './search/Searchbar';
 import homeIcon from './images/homeIcon.png';
 import whatsappIcon from './images/whatsappIcon.png';
 import aboutIcon from './images/aboutIcon.jpg';
+import accountIcon from './images/accountIcon.jpg';
 
 function Navbar() {
     return (
@@ -26,6 +27,11 @@ function Navbar() {
             <div className="aboutLink">
                 <Link to="/about">
                     <img className="navIcon" src={aboutIcon} alt="About" />
+                </Link>
+            </div>
+            <div className="accountLink">
+                <Link to="/profile">
+                    <img className="navIcon" src={accountIcon} alt="Account" />
                 </Link>
             </div>
         </div>
