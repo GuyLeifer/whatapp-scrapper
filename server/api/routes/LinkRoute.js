@@ -76,6 +76,15 @@ router.get('/analysis/authors', async (req, res) => {
         res.send(err)
     }
 })
+router.get('/by-id/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const link = await Link.find({ "_id": id })
+        res.send(link)
+    } catch (err) {
+        res.send(err)
+    }
+})
 router.get('/by-date', async (req, res) => {
     try {
         const allLinks = await Link.find().sort( { date: 1, _id: 1 })
@@ -84,9 +93,37 @@ router.get('/by-date', async (req, res) => {
         res.send(err)
     }
 })
+router.get('/by-date/date', async (req, res) => {
+    const { date } = req.params;
+    try {
+        const allLinks = await Link.find({ "date": date })
+        res.send(allLinks)
+    } catch (err) {
+        res.send(err)
+    }
+})
 router.get('/by-author', async (req, res) => {
     try {
         const allLinks = await Link.find().sort( { author: 1, _id: 1 })
+        res.send(allLinks)
+    } catch (err) {
+        res.send(err)
+    }
+})
+router.get('/by-author/:author', async (req, res) => {
+    const { author } = req.params;
+    try {
+        const allLinks = await Link.find({ "author": author })
+        res.send(allLinks)
+    } catch (err) {
+        res.send(err)
+    }
+})
+
+router.get('/search/:query', async (req, res) => {
+    const { query } = req.params;
+    try {
+        const allLinks = await Link.find({links:{'$regex' : query}}).limit( 8 )
         res.send(allLinks)
     } catch (err) {
         res.send(err)

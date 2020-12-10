@@ -2,7 +2,7 @@ import React from 'react';
 import './Navbar.css';
 
 import { Link } from "react-router-dom";
-// import Searchbar from './search/Searchbar';
+import Searchbar from './search/Searchbar';
 
 // icons
 import homeIcon from './images/homeIcon.png';
@@ -22,7 +22,7 @@ function Navbar() {
                     <img className="navIcon" src={whatsappIcon} alt="Posts" />
                 </Link>
             </div>
-            {/* <Searchbar /> */}
+            <Searchbar />
             <div className="aboutLink">
                 <Link to="/about">
                     <img className="navIcon" src={aboutIcon} alt="About" />
