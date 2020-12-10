@@ -13,9 +13,9 @@ services:
       - ./server:/usr/app/server
       # - '/usr/app/server/node_modules'
     ports:
-      - '8000:8000'
+      - '8001:8001'
     environment:
-      PORT: 8000
+      PORT: 8001
     networks:
       frontapp_b:
         ipv4_address: 173.22.0.21
@@ -31,7 +31,7 @@ services:
     volumes:
       - ./client:/usr/app/client
     ports:
-      - '4000:4000'
+      - '3000:3000'
     depends_on:
       - server-whatapp-scraper ## server image
     networks:
