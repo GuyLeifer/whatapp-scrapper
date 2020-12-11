@@ -54,6 +54,45 @@ router.get('/analysis', async (req, res) => {
         res.send(err)
     }
 })
+
+router.get('/analysis/websites', async (req, res) => {
+    try {
+        const links = await Link.find();
+        let webLinks = [];
+        links.forEach(link => {
+            let webName = new URL(link.links[0]).host;
+            if (webName.startsWith("www")) webName = webName.slice(4);
+            webLinks.push(webName)         
+        })
+        webLinks.sort();
+        let websites = [];
+        // for (let i = 0; i < websites.length; i++) {
+        //     for (let j = 0; j < webLinks.length; j++) {
+        //         if (websites[i].hasOwnProperty(webLinks[j])) {
+        //             websites[i].count++;
+        //         } else if (websites)
+        //     }
+        // }
+        let webNames = [];
+        webLinks.forEach(link => {
+            if(webNames.includes(link)) {
+                websites.forEach(web => {
+                    if(web.name === link) web.count++
+                })
+            } else {
+                webNames.push(link)
+                websites.push({
+                    name: link,
+                    count: 1
+                })
+            }
+        })
+        websites.sort((a, b) => b.count - a.count)
+        res.send(websites)
+    } catch (err) {
+        res.send(err)
+    }
+})
 router.get('/analysis/dates', async (req, res) => {
     try {
         const allLinks = await Link.aggregate( [ 

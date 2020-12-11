@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function Links() {
 
+    const [loading, setLoading] = useState(true);
     const [linksByDates, setLinksByDates] = useState([]);
     const [linksByAuthors, setLinksByAuthors] = useState([]);
     const [byDate, setByDate] = useState(true);
@@ -14,6 +15,7 @@ function Links() {
             setLinksByDates(dateLinks.data);
             const dateAuthors = await axios.get('/links/by-author');
             setLinksByAuthors(dateAuthors.data);
+            setLoading(false)
         })()
     }, [])
 
@@ -34,33 +36,39 @@ function Links() {
     }
 
     return (
-        <div className="linksPage">
-            <div className="options">
-                <h2 id="date" className="chosen" onClick={() => setChoosen('date')}>By Date</h2>
-                <h2 id="author" onClick={() => setChoosen('author')}>By Author</h2>
-            </div>
-            { byDate ?
-                linksByDates.map(link => ( 
-                    <div className="linkDiv">
-                        <div className="dateLink">{link.date.slice(0, 10)}</div>
-                        <div>
-                            {/* {link.links.map(lin => <span className="link">{lin}</span>)} */}
-                            <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
-                        </div>
-                        <div className="authorLink">{link.author}</div>
-                    </div> 
-            )):   
-                linksByAuthors.map(link => ( 
-                    <div className="linkDiv">
-                        <div className="dateLink">{link.date.slice(0, 10)}</div>
-                        <div>
-                            {/* {link.links.map(lin => <span className="link">{lin}</span>)} */}
-                            <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
-                        </div>
-                        <div className="authorLink">{link.author}</div>
-                    </div>           
-            ))}
-        </div>
+        <>  
+            {!loading ?
+                <div className="linksPage">
+                <div className="options">
+                    <h2 id="date" className="chosen" onClick={() => setChoosen('date')}>By Date</h2>
+                    <h2 id="author" onClick={() => setChoosen('author')}>By Author</h2>
+                </div>
+                { byDate ?
+                    linksByDates.map(link => ( 
+                        <div className="linkDiv">
+                            <div className="dateLink">{link.date.slice(0, 10)}</div>
+                            <div>
+                                {/* {link.links.map(lin => <span className="link">{lin}</span>)} */}
+                                <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
+                            </div>
+                            <div className="authorLink">{link.author}</div>
+                        </div> 
+                )):   
+                    linksByAuthors.map(link => ( 
+                        <div className="linkDiv">
+                            <div className="dateLink">{link.date.slice(0, 10)}</div>
+                            <div>
+                                {/* {link.links.map(lin => <span className="link">{lin}</span>)} */}
+                                <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
+                            </div>
+                            <div className="authorLink">{link.author}</div>
+                        </div>           
+                ))}
+                </div>
+            : <h2>Loading ...</h2>
+            }
+            
+        </>
     )
 }
 

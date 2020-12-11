@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
+import ChangeFile from '../file/ChangeFile';
 
 import axios from 'axios';
 import {
     BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Brush,
-  } from 'recharts';
+} from 'recharts';
+//   import { useHistory } from 'react-router-dom';
 
 function Dashboard() {
 
+    const [loading, setLoading] = useState(true);
     const [links, setLinks] = useState([]);
     const [linksByDates, setLinksByDates] = useState([]);
     const [linksByAuthors, setLinksByAuthors] = useState([]);
+    const [chatFileExists, setChatFileExists] = useState();
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     useEffect(() => {
         (async () => {
-            const { data } = await axios.get('/links/analysis');
+
+            const { data } = await axios.get('/links/analysis/websites');
             setLinks(data);
 
             let dates = await axios.get('/links/analysis/dates');
@@ -28,95 +34,97 @@ function Dashboard() {
 
             const authors = await axios.get('/links/analysis/authors');
             setLinksByAuthors(authors.data);
+
+            const file = await axios.get('/chatfile');
+            setChatFileExists(file.data);
+
+            setLoading(false)            
         })()
     }, [])
 
-    const linksData = [
-        { 
-            web: 'Youtube',
-            amount: 0
-        },
-        { 
-            web: 'Facebook',
-            amount: 0
-        },
-        { 
-            web: 'Github',
-            amount: 0
-        },
-        { 
-            web: 'StackOverFlow',
-            amount: 0
-        },
-        { 
-            web: 'LinkedIn',
-            amount: 0
-        },
-    ]
+    // let history = useHistory();
 
-    for (let i = 0; i < links.length; i++) {
-        linksData[i].amount = links[i].length
+    const changeChat = () => {
+        setModalIsOpen(true)
     }
 
     return (
-        <div className="dashboard">
-            <div className="firstLine">
-                <div className="chart">
-                    <h2>Links Statistics</h2>
-                    <BarChart
-                    width={700}
-                    height={300}
-                    data={linksData}
-                    margin={{
-                        top: 5, right: 30, left: 20, bottom: 5,
-                    }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="web" />
-                        <YAxis />
-                        <Tooltip />
-                        <Bar dataKey="amount" fill="purple" />
-                    </BarChart>
-                </div>
-                <div className="chart">
-                    <h2>Authors Statistics</h2>
-                    <BarChart
-                    width={700}
-                    height={300}
-                    data={linksByAuthors}
-                    margin={{
-                        top: 5, right: 30, left: 20, bottom: 5,
-                    }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="_id" />
-                        <YAxis />
-                        <Tooltip />
-                        <Bar dataKey="count" fill="green" />
-                        <Brush />
-                    </BarChart>
-                </div>
-            </div>
-                <div className="chart">
-                <h2>Date Statistics</h2>
-                <LineChart
-                    width={1500}
-                    height={300}
-                    data={linksByDates}
-                    syncId="anyId"
-                    margin={{
-                    top: 10, right: 30, left: 0, bottom: 0,
-                    }}
-                >           
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="links" stroke="#2C3A47" fill="#2C3A47" />
-                    <Brush />
-                </LineChart>
-                </div> 
-        </div>
+        <>
+            { loading ?
+                <h2>Loading ...</h2>
+            : 
+                chatFileExists ?
+                    <div className="dashboard">
+                        <div className="redirect" onClick={() => changeChat()}>Wanna Change Chat?</div>
+                        {modalIsOpen && <ChangeFile modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}/>}
+                        <ChangeFile />
+                        <div className="firstLine">
+                            <div className="chart">
+                                <h2>Links Statistics</h2>
+                                <BarChart
+                                width={700}
+                                height={300}
+                                data={links}
+                                margin={{
+                                    top: 5, right: 30, left: 20, bottom: 5,
+                                }}
+                                >
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="name" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Bar dataKey="count" fill="purple" />
+                                    <Brush startIndex={0} endIndex={10}/>
+                                </BarChart>
+                            </div>
+                            <div className="chart">
+                                <h2>Authors Statistics</h2>
+                                <BarChart
+                                width={700}
+                                height={300}
+                                data={linksByAuthors}
+                                margin={{
+                                    top: 5, right: 30, left: 20, bottom: 5,
+                                }}
+                                >
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="_id" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Bar dataKey="count" fill="green" />
+                                    <Brush startIndex={0} endIndex={10}/>
+                                </BarChart>
+                            </div>
+                        </div>
+                            <div className="chart">
+                            <h2>Date Statistics</h2>
+                            <LineChart
+                                width={1500}
+                                height={300}
+                                data={linksByDates}
+                                syncId="anyId"
+                                margin={{
+                                top: 10, right: 30, left: 0, bottom: 0,
+                                }}
+                            >           
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="date" />
+                                <YAxis />
+                                <Tooltip />
+                                <Line type="monotone" dataKey="links" stroke="#2C3A47" fill="#2C3A47" strokeWidth={4}/>
+                                <Brush />
+                            </LineChart>
+                        </div> 
+                    </div>
+                : <div>
+                    <form>
+                        <input type="file" />
+                    </form>
+                </div>         
+            }
+            
+        
+    </>
     )
 }
 

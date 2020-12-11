@@ -21,6 +21,10 @@
     color: #25D366;
     font-weight: 500;
     font-size: 150%;
+    transition: 800ms;
+}
+.linkAnchor:hover {
+    color: blue;
 }
 .chosen {
     /* color: #25D366; */

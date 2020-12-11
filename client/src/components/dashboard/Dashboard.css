@@ -11,3 +11,11 @@
 .recharts-wrapper {
     margin : 0 auto;
 }
+.redirect {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 140%;
+    cursor: pointer;
+}
+.redirect:hover {
+    color: #25D366;
+}
