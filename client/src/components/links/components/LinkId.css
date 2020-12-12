@@ -27,14 +27,51 @@
 }
 .content {
     overflow-wrap: break-word;
+    border: 2px solid #25D366;
+    margin: 20px;
+    padding: 20px;
 }
 .author {
     width: 33%;
     text-align: left;
 }
 .linkAtLinkId {
-    color: black;
+    color: #25D366;   
+}
+.linkDivision {
+    border: 2px solid #25D366;
+    margin: 20px;
+    padding: 20px;
 }
 .authorAtLinkId {
     font-family: 'Varela Round', sans-serif;
+}
+.chatHistory {
+    border: 2px solid #25D366;
+    padding: 20px;
+    margin: 20px;
+}
+.chatHistoryContent {
+    display: flex;
+    justify-content: space-between;
+}
+.chatHistoryDate {
+    font-size: 70%;
+
+}
+.chatHistoryMessage {
+    font-family: 'Varela Round', sans-serif;
+    color: #25D366;
+    font-size: 70%;
+}
+.chatHistoryAuthor {
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 600;
+    font-size: 70%;
+}
+.title {
+    font-size: 180%;
+    color: black;
+    background-color: #25D366;
+    margin: 5% auto;
 }

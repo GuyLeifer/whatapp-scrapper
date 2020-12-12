@@ -77,7 +77,7 @@ function Dashboard() {
                                     <Brush startIndex={0} endIndex={10}/>
                                 </BarChart>
                             </div>
-                            <div className="chart">
+                            <div className="chart authorChart">
                                 <h2>Authors Statistics</h2>
                                 <BarChart
                                 width={700}

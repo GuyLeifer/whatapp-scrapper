@@ -14,14 +14,15 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 router.post('/', (req, res) => {
-    const { id, links, message, author, date } = req.body;
+    const { id, links, message, author, date, history } = req.body;
     try {
         const link = new Link({
             _id: id,
             links: links,
             message: message,
             author: author,
-            date: date
+            date: date,
+            history: history,
         })
         link.save()
             .then(result => console.log(result))

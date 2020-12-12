@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Links.css';
+
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Links() {
 
@@ -13,6 +15,7 @@ function Links() {
         (async () => {
             const dateLinks  = await axios.get('/links/by-date');
             setLinksByDates(dateLinks.data);
+            console.log(dateLinks.data)
             const dateAuthors = await axios.get('/links/by-author');
             setLinksByAuthors(dateAuthors.data);
             setLoading(false)
@@ -39,6 +42,7 @@ function Links() {
         <>  
             {!loading ?
                 <div className="linksPage">
+                <div className="counter">{linksByDates.length || linksByAuthors.length} Links</div>
                 <div className="options">
                     <h2 id="date" className="chosen" onClick={() => setChoosen('date')}>By Date</h2>
                     <h2 id="author" onClick={() => setChoosen('author')}>By Author</h2>
@@ -48,8 +52,8 @@ function Links() {
                         <div className="linkDiv">
                             <div className="dateLink">{link.date.slice(0, 10)}</div>
                             <div>
-                                {/* {link.links.map(lin => <span className="link">{lin}</span>)} */}
                                 <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
+                                <Link to={`/links/${link._id}`} className="linkLinkPage">(Go To Link Page)</Link>
                             </div>
                             <div className="authorLink">{link.author}</div>
                         </div> 
@@ -58,8 +62,8 @@ function Links() {
                         <div className="linkDiv">
                             <div className="dateLink">{link.date.slice(0, 10)}</div>
                             <div>
-                                {/* {link.links.map(lin => <span className="link">{lin}</span>)} */}
                                 <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
+                                <Link to={`/links/${link._id}`} className="linkLinkPage">(Go To Link Page)</Link>
                             </div>
                             <div className="authorLink">{link.author}</div>
                         </div>           

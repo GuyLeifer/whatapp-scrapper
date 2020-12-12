@@ -40,3 +40,12 @@
     font-family: 'Varela Round', sans-serif;
     font-weight: 600;
 }
+.linkLinkPage {
+    margin-left: 10px;
+    color: black;
+}
+.counter {
+    font-size: 180%;
+    text-decoration: underline;
+    font-family: 'Varela Round', sans-serif;
+}
