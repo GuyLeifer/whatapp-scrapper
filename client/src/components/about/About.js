@@ -14,6 +14,7 @@ function About() {
             <img className="WhatsAppLinkImage" src={WhatsAppLinkImage} alt="WhatsApp"/>
             <p>This Site is taking your chat history of your whatsapp and collect the links you and your friends shared each other</p>
             <p>The home page includes charts with information, and the links page includes all the links of the group</p>
+            <p>Every Link has a page, contains the Link itself, the all message sent, the chat history for the context, the author and the date.</p>
             <p>Enjoy the Experience of the site!</p>
         </div>
     )

@@ -1,8 +1,26 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
 
-const fs = require('fs')
+const multer  = require('multer');
+const upload = multer({ dest: 'chats/' });
+
+const scraper = require('../../scraper')
+
+const fs = require('fs');
 const path = './_chat.txt';
+
+const mongoose = require('mongoose');
+const Link = require('../models/mongoSchema');
+
+mongoose.connect(process.env.MONGODB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).catch(err => console.log(err.reason));
+
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
 
 router.get('/', async (req, res) => {
     try {
@@ -19,25 +37,28 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.post('/', (req, res) => {
-    const formData = req.body;
-    console.log(req)
+router.post('/', upload.single('file'), async (req, res) => {
+    const formData = req.file;
     try {
-        console.log(file)
-        // fs.writeFileSync('./chat.txt', file)
+        fs.writeFileSync('./_chat.txt', fs.readFileSync(formData.path, 'utf8'), 'utf8');
+        await Link.remove({});
+        scraper();
+        res.send("Chat Uploaded Successfully")
     } catch (err) {
         res.send(err.message)
     }
 })
-router.put('/', (req, res) => {
+
+router.put('/', upload.single('file'), async (req, res) => {
     const formData = req.file;
-    console.log(req.fields)
-    // try {
-    //     console.log(fs.readFileSync(file))
-    //     // fs.writeFileSync('./chat.txt', file)
-    // } catch (err) {
-    //     res.send(err.message)
-    // }
+    try {
+        fs.writeFileSync('./_chat.txt', fs.readFileSync(formData.path, 'utf8'), 'utf8');
+        await Link.remove({});
+        scraper();
+        res.send("Chat Exchanged Successfully")
+    } catch (err) {
+        res.send(err.message)
+    }
 })
 
 module.exports = router;

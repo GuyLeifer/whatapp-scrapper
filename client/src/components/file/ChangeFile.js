@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import './ChangeFile.css';
 
 import Modal from 'react-modal';
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form, Button, Card } from "react-bootstrap";
 import axios from 'axios';
-// const fs = require('fs');
 
 // Modal issue
 Modal.setAppElement('div');
@@ -25,7 +24,7 @@ const customStyles = {
     
 };
 
-function ChangeFile({ modalIsOpen, setModalIsOpen }) {
+function ChangeFile({ modalIsOpen, setModalIsOpen, method }) {
 
     const [file, setFile] = useState();
     const [loading, setLoading] = useState(false);
@@ -35,22 +34,33 @@ function ChangeFile({ modalIsOpen, setModalIsOpen }) {
     async function handleSubmit(e) {
         e.preventDefault();
         let formData = new FormData();
-        console.log("file", file)
         formData.append("file", file);
-        console.log(formData.values())
+        // for (const key of formData.entries()) {
+        //     console.log(key[0] + ', ' + key[1]);
+        // }
         try {
             setLoading(true)
-            await axios.put('chatfile', formData, {
-                headers: {
-                    'content-type': 'multipart/form-data'
-                }
-            })
-            setModalIsOpen(false)
+            if (method === "put") {
+                await axios.put('/chatfile', formData, {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                })
+            } else if (method === "post") {
+                await axios.post('/chatfile', formData, {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                })
+            }
+            setTimeout( () => {
+                setModalIsOpen(false)
+                setLoading(false)
+                window.location.assign('/')
+            }, 20 * 1000)
         } catch (err) {
             console.log(err.message)
         }
-
-        setLoading(false)
     }
 
     return (
@@ -68,12 +78,12 @@ function ChangeFile({ modalIsOpen, setModalIsOpen }) {
                 <ol>
                     <li>Open the individual or group chat.</li>
                     <li>Tap <strong>
-                        <a class="_36or" href="https://faq.whatsapp.com/android/troubleshooting/finding-the-more-options-icon">More options</a>
+                        <a className="_36or" href="https://faq.whatsapp.com/android/troubleshooting/finding-the-more-options-icon">More options</a>
                         </strong>
-                        <span class="margin-cms"></span>
+                        <span className="margin-cms"></span>
                         <picture>
                             <source srcset="https://scontent.whatsapp.net/v/t39.8562-34/cp0/p50x50/118117430_995065920932265_1336446442210986426_n.jpg.webp?ccb=2&amp;_nc_sid=8a74b9&amp;_nc_ohc=FkoQxIVv9k8AX-L84FN&amp;_nc_ht=scontent.whatsapp.net&amp;_nc_tp=30&amp;oh=fae6e19a6fa7cd3dc95114bb9c810ecb&amp;oe=5FF8A6EF" type="image/webp" />
-                            <img class="icon _-p-" id="" src="https://scontent.whatsapp.net/v/t39.8562-34/cp0/e10/p50x50/118117430_995065920932265_1336446442210986426_n.jpg?ccb=2&amp;_nc_sid=8a74b9&amp;_nc_ohc=FkoQxIVv9k8AX-L84FN&amp;_nc_ht=scontent.whatsapp.net&amp;tp=27&amp;oh=c1d646cee43051ee2092c41f796488f1&amp;oe=5FF64776" loading="lazy" />
+                            <img className="icon _-p-" id="" src="https://scontent.whatsapp.net/v/t39.8562-34/cp0/e10/p50x50/118117430_995065920932265_1336446442210986426_n.jpg?ccb=2&amp;_nc_sid=8a74b9&amp;_nc_ohc=FkoQxIVv9k8AX-L84FN&amp;_nc_ht=scontent.whatsapp.net&amp;tp=27&amp;oh=c1d646cee43051ee2092c41f796488f1&amp;oe=5FF64776" loading="lazy" />
                         </picture> 
                         &gt; <strong>More</strong> &gt; <strong>Export chat</strong>. 
                         </li>
@@ -100,6 +110,7 @@ function ChangeFile({ modalIsOpen, setModalIsOpen }) {
                     <Button disabled={loading} className="w-20" type="submit">
                             Submit
                         </Button>
+                        { loading && <div>Loading...</div>}
                 </Form>
             </Card>
         </Modal>

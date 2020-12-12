@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Links.css';
 
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 function Links() {
 
@@ -15,7 +15,6 @@ function Links() {
         (async () => {
             const dateLinks  = await axios.get('/links/by-date');
             setLinksByDates(dateLinks.data);
-            console.log(dateLinks.data)
             const dateAuthors = await axios.get('/links/by-author');
             setLinksByAuthors(dateAuthors.data);
             setLoading(false)
@@ -43,10 +42,14 @@ function Links() {
             {!loading ?
                 <div className="linksPage">
                 <div className="counter">{linksByDates.length || linksByAuthors.length} Links</div>
-                <div className="options">
-                    <h2 id="date" className="chosen" onClick={() => setChoosen('date')}>By Date</h2>
-                    <h2 id="author" onClick={() => setChoosen('author')}>By Author</h2>
-                </div>
+                {(linksByDates.length === 0 || linksByAuthors.length === 0) ?
+                    <Redirect to="/" />
+                :
+                    <div className="options">
+                        <h2 id="date" className="chosen" onClick={() => setChoosen('date')}>By Date</h2>
+                        <h2 id="author" onClick={() => setChoosen('author')}>By Author</h2>
+                    </div>               
+                }
                 { byDate ?
                     linksByDates.map(link => ( 
                         <div className="linkDiv">

@@ -30,7 +30,7 @@ function PostId({ match}) {
                 </div>
                 <div className="content">
                     <h4>Message:</h4>
-                    <div>{link.message}</div>
+                    <div className="messageAtLinkId">{link.message}</div>
                 </div>
                 <div className="chatHistory">
                     <div>Chat History:</div>

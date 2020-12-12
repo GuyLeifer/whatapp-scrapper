@@ -15,7 +15,8 @@ function Dashboard() {
     const [linksByDates, setLinksByDates] = useState([]);
     const [linksByAuthors, setLinksByAuthors] = useState([]);
     const [chatFileExists, setChatFileExists] = useState();
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalExchangeChatIsOpen, setModalExchangeChatIsOpen] = useState(false);
+    const [modalUploadChatIsOpen, setModalUploadChatIsOpen] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -38,6 +39,8 @@ function Dashboard() {
             const file = await axios.get('/chatfile');
             setChatFileExists(file.data);
 
+            if(file.data === false) setModalUploadChatIsOpen(true)
+
             setLoading(false)            
         })()
     }, [])
@@ -45,7 +48,10 @@ function Dashboard() {
     // let history = useHistory();
 
     const changeChat = () => {
-        setModalIsOpen(true)
+        setModalExchangeChatIsOpen(true)
+    }
+    const uploadChat = () => {
+        setModalUploadChatIsOpen(true)
     }
 
     return (
@@ -56,8 +62,7 @@ function Dashboard() {
                 chatFileExists ?
                     <div className="dashboard">
                         <div className="redirect" onClick={() => changeChat()}>Wanna Change Chat?</div>
-                        {modalIsOpen && <ChangeFile modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}/>}
-                        <ChangeFile />
+                        {modalExchangeChatIsOpen && <ChangeFile modalIsOpen={modalExchangeChatIsOpen} setModalIsOpen={setModalExchangeChatIsOpen} method="put"/>}<ChangeFile />
                         <div className="firstLine">
                             <div className="chart">
                                 <h2>Links Statistics</h2>
@@ -117,9 +122,9 @@ function Dashboard() {
                         </div> 
                     </div>
                 : <div>
-                    <form>
-                        <input type="file" />
-                    </form>
+                    <div> There Is Not Available Chat</div>
+                    <div className="redirect" onClick={() => uploadChat()}>Uplaod A Chat</div>
+                    <ChangeFile modalIsOpen={modalUploadChatIsOpen} setModalIsOpen={setModalUploadChatIsOpen} method="post" /><ChangeFile />
                 </div>         
             }
             

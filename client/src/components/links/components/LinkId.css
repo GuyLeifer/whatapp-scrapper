@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 .linkId {
     margin: 40px auto;
-    max-width: 800px;
+    max-width: 80%;
     padding:10px;
     box-shadow: 0px 0px 10px;
     position: relative;
@@ -11,7 +11,7 @@
     font-family: 'Bebas Neue', cursive;
 }
 .footer {
-    margin: 10px 0; 
+    margin: 3% auto 1% auto;
     padding: 3px;
     background-color: #25D366;
 }
@@ -73,5 +73,10 @@
     font-size: 180%;
     color: black;
     background-color: #25D366;
-    margin: 5% auto;
+    /* margin: 5% auto; */
+    margin: 1% auto 3% auto;
+
+}
+.messageAtLinkId {
+    color: #25D366;
 }

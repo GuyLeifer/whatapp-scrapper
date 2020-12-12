@@ -31,7 +31,7 @@ services:
     volumes:
       - ./client:/usr/app/client
     ports:
-      - '3000:3000'
+      - '4000:3000'
     depends_on:
       - server-whatapp-scraper ## server image
     networks:
