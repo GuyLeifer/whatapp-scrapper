@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Gloria+Hallelujah&family=Gochi+Hand&family=Indie+Flower&family=Permanent+Marker&display=swap');
+.about {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 120%;
+}
+.WhatsAppLinkImage {
+    border-radius: 10%;
+    max-width: 40%;
+    margin: 3%;
+    transition: 2s;
+    cursor: pointer;
+}
+.WhatsAppLinkImage:hover {
+    border-radius: 40%;
+    transition: 2s;
+}

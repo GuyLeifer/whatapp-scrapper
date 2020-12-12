@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gloria+Hallelujah&family=Gochi+Hand&family=Permanent+Marker&display=swap');
+
+.formModal input {
+    margin: 20px auto;
+    font-family: 'Bebas Neue', cursive;
+}
+.card {
+    color: black;
+    border-radius: 20%;
+}
+#chatFileUpload {
+    margin: 1% auto;
+}
+#fileUpload {
+    width: 20px;
+}
+#fileUpload {
+    margin: auto;
+}

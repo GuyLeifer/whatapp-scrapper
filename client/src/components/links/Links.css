@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Gloria+Hallelujah&family=Gochi+Hand&family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+.linksPage {
+    margin: 10px;
+    font-family: 'Bebas Neue', cursive;
+}
+.linkDiv {
+    display: flex;
+    justify-content: space-between;
+    margin: auto 30px;
+}
+.options {
+    display: flex;
+    justify-content: space-around;  
+}
+.options h2 {
+    cursor: pointer;
+}
+.linkAnchor {
+    color: #25D366;
+    font-weight: 500;
+    font-size: 150%;
+    transition: 800ms;
+}
+.linkAnchor:hover {
+    color: blue;
+}
+.chosen {
+    /* color: #25D366; */
+    font-size: 220%;
+    text-decoration: underline;
+    transition: 1s;
+}
+.authorLink {
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 600;
+}
+.dateLink {
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 600;
+}
+.linkLinkPage {
+    margin-left: 10px;
+    color: black;
+}
+.counter {
+    font-size: 180%;
+    text-decoration: underline;
+    font-family: 'Varela Round', sans-serif;
+}

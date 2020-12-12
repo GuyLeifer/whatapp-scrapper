@@ -1,0 +1,47 @@
+version: '3.1'
+
+services:
+
+## server image
+  server-whatapp-scraper:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: server-whatapp-scraper
+    stdin_open: true
+    volumes:
+      - ./server:/usr/app/server
+      # - '/usr/app/server/node_modules'
+    ports:
+      - '8001:8001'
+    environment:
+      PORT: 8001
+    networks:
+      frontapp_b:
+        ipv4_address: 173.22.0.21
+
+
+## client image
+  app-whatapp-scraper:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: app-whatapp-scraper
+    stdin_open: true
+    volumes:
+      - ./client:/usr/app/client
+    ports:
+      - '4000:3000'
+    depends_on:
+      - server-whatapp-scraper ## server image
+    networks:
+      frontapp_b:
+        ipv4_address: 173.22.0.20
+
+networks:
+  frontapp_b:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 173.22.0.0/16
