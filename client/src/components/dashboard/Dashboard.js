@@ -74,11 +74,11 @@ function Dashboard() {
                                     <YAxis />
                                     <Tooltip />
                                     <Bar dataKey="count" fill="purple" />
-                                    <Brush startIndex={0} endIndex={10}/>
+                                    <Brush startIndex={0} endIndex={4}/>
                                 </BarChart>
                             </div>
                             <div className="chart authorChart">
-                                <h2>Authors Statistics</h2>
+                                <h2 className="authorsChartH2">Authors Statistics</h2>
                                 <BarChart
                                 width={700}
                                 height={300}
@@ -92,7 +92,7 @@ function Dashboard() {
                                     <YAxis />
                                     <Tooltip />
                                     <Bar dataKey="count" fill="green" />
-                                    <Brush startIndex={0} endIndex={10}/>
+                                    <Brush startIndex={0} endIndex={5}/>
                                 </BarChart>
                             </div>
                         </div>
