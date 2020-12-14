@@ -12,7 +12,8 @@
 }
 .options {
     display: flex;
-    justify-content: space-around;  
+    justify-content: space-around;
+    margin: 2%;  
 }
 .options h2 {
     cursor: pointer;
@@ -48,4 +49,8 @@
     font-size: 180%;
     text-decoration: underline;
     font-family: 'Varela Round', sans-serif;
+}
+.domainName {
+    font-size: 180%;
+    margin-top: 5%;
 }

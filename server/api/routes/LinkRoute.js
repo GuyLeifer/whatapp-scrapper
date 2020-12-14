@@ -42,20 +42,6 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/analysis', async (req, res) => {
-    try {
-        const linksYoutube = await Link.find({"links": /^https:\/\/www.youtube/});
-        const linksFacebook = await Link.find({"links": /^https:\/\/www.facebook/});
-        const linksGithub = await Link.find({"links": /^https:\/\/www.github/});
-        const linksStackOverflow = await Link.find({"links": /^https:\/\/www.stackoverflow/});
-        const linksLinkedin = await Link.find({"links": /^https:\/\/www.linkedin/});
-        
-        res.send([linksYoutube, linksFacebook, linksGithub, linksStackOverflow, linksLinkedin])
-    } catch (err) {
-        res.send(err)
-    }
-})
-
 router.get('/analysis/websites', async (req, res) => {
     try {
         const links = await Link.find();
@@ -94,6 +80,60 @@ router.get('/analysis/websites', async (req, res) => {
         res.send(err)
     }
 })
+router.get('/by-web', async (req, res) => {
+    try {
+        const links = await Link.aggregate(
+            [ { $project : { links : 1, author : 1, date : 1 } } ]
+        );
+        let webLinks = [];
+        links.forEach(link => {
+            let webName = new URL(link.links[0]).host;
+            if (webName.startsWith("www")) webName = webName.slice(4);
+            webLinks.push( {
+                id: link._id,
+                webName: webName
+            })         
+        })
+        webLinks.sort();
+        let websites = [];
+        let webNames = [];
+        webLinks.forEach(link => {
+            if(webNames.includes(link.webName)) {
+                websites.forEach(web => {
+                    if(web.name === link.webName) {
+                        web.count++;
+                        web.ids.push(link.id);
+                    }
+                })
+            } else {
+                webNames.push(link.webName)
+                websites.push({
+                    name: link.webName,
+                    count: 1,
+                    ids: [link.id]
+                })
+            }
+        })
+        websites.sort((a, b) => b.count - a.count)
+        let linksByDomains = [];
+        websites.forEach(domain => {
+            let ids = [];
+            domain.ids.forEach(id => {
+                links.forEach(link => {
+                    if (id === link._id) ids.push(link)
+                })
+            })
+            linksByDomains.push({
+                domain: domain.name,
+                count: domain.count,
+                ids: ids
+            })
+        })
+        res.send(linksByDomains)
+    } catch (err) {
+        res.send(err)
+    }
+})
 router.get('/analysis/dates', async (req, res) => {
     try {
         const allLinks = await Link.aggregate( [ 
@@ -127,13 +167,15 @@ router.get('/by-id/:id', async (req, res) => {
 })
 router.get('/by-date', async (req, res) => {
     try {
-        const allLinks = await Link.find().sort( { date: 1, _id: 1 })
+        const allLinks = await Link.aggregate(
+            [ { $project : { links : 1, author : 1, date : 1 } } ]
+        ).sort( { date: 1, _id: 1 })
         res.send(allLinks)
     } catch (err) {
         res.send(err)
     }
 })
-router.get('/by-date/date', async (req, res) => {
+router.get('/by-date/:date', async (req, res) => {
     const { date } = req.params;
     try {
         const allLinks = await Link.find({ "date": date })
@@ -144,7 +186,9 @@ router.get('/by-date/date', async (req, res) => {
 })
 router.get('/by-author', async (req, res) => {
     try {
-        const allLinks = await Link.find().sort( { author: 1, _id: 1 })
+        const allLinks = await Link.aggregate(
+            [ { $project : { links : 1, author : 1, date : 1 } } ]
+        ).sort( { author: 1, _id: 1 })
         res.send(allLinks)
     } catch (err) {
         res.send(err)
