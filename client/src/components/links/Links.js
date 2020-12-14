@@ -70,6 +70,14 @@ function Links() {
         }
     }
 
+    const setDisplay = (domain) => {
+        if (document.getElementById(domain).style.display === 'none') {
+            document.getElementById(domain).style.display = 'block'
+        } else {
+            document.getElementById(domain).style.display = 'none'
+        }
+    }
+
     return (
         <>  
             {!loading ?
@@ -107,7 +115,8 @@ function Links() {
                 )) : byDomain ?
                     linksByDomains.map(domain => ( 
                         <div className="domainDiv">
-                            <div className="domainName">{domain.domain + " (" + domain.count + ")"}</div>
+                            <div className="domainName" onClick={() => setDisplay(domain.domain)}>{domain.domain + " (" + domain.count + ")"}</div>
+                            <div id={domain.domain} className="domainLinks" style={{display: "none"}}>
                             {domain.ids.map(link => (
                                 <div className="linkDiv">
                                 <div className="dateLink">{link.date.slice(0, 10)}</div>
@@ -118,6 +127,7 @@ function Links() {
                                 <div className="authorLink">{link.author}</div>
                             </div> 
                             ))}
+                            </div> 
                         </div> 
             ))
             : <></>

@@ -28,8 +28,9 @@
     color: blue;
 }
 .chosen {
-    /* color: #25D366; */
+    color: #25D366;
     font-size: 220%;
+    font-weight: 900;
     text-decoration: underline;
     transition: 1s;
 }
@@ -52,5 +53,5 @@
 }
 .domainName {
     font-size: 180%;
-    margin-top: 5%;
+    cursor: pointer;
 }
