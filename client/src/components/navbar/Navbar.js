@@ -3,12 +3,14 @@ import './Navbar.css';
 
 import { Link } from "react-router-dom";
 import Searchbar from './search/Searchbar';
+import ChangeFile from '../file/ChangeFile';
 
 // icons
 import homeIcon from './images/homeIcon.png';
 import whatsappIcon from './images/whatsappIcon.png';
 import aboutIcon from './images/aboutIcon.jpg';
 import accountIcon from './images/accountIcon.jpg';
+import changeIcon from './images/changeIcon.png'
 
 import { useAuth } from "../firebaseAuth/contexts/AuthContext";
 import { auth, storage } from '../firebaseAuth/firebase';
@@ -16,6 +18,7 @@ import { auth, storage } from '../firebaseAuth/firebase';
 function Navbar() {
 
     const [authIcon, setAuthIcon] = useState(accountIcon);
+    const [modalUploadChatIsOpen, setModalUploadChatIsOpen] = useState(false);
 
     const { currentUser } = useAuth();
     let uid = null;
@@ -36,7 +39,7 @@ function Navbar() {
     })
 
     return (
-        <div className="navbar">
+        <div className="Navbar">
             <div className="homeLink">
                 <Link to="/">
                     <img className="navIcon" src={homeIcon} alt="Home" />
@@ -47,7 +50,15 @@ function Navbar() {
                     <img className="navIcon" src={whatsappIcon} alt="Posts" />
                 </Link>
             </div>
-            <Searchbar />
+            {currentUser && 
+            <>
+                <div className="ChangeChatLink">
+                    <img className="navIcon" src={changeIcon} alt="Change Chat" onClick={() => setModalUploadChatIsOpen(prev => !prev)}/>
+                </div>
+                {modalUploadChatIsOpen && <ChangeFile modalIsOpen={modalUploadChatIsOpen} setModalIsOpen={setModalUploadChatIsOpen} method="put"/>}<ChangeFile />
+                <Searchbar />
+            </>
+            }     
             <div className="aboutLink">
                 <Link to="/about">
                     <img className="navIcon" src={aboutIcon} alt="About" />

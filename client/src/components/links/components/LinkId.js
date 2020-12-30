@@ -4,7 +4,7 @@ import './LinkId.css';
 import axios from 'axios';
 // import GenericNotFound from '../../../components/genericNotFound/GenericNotFound'
 
-function PostId({ match}) {
+function LinkId({ match}) {
     const [link, setLink] = useState();
     const { id } = match.params;
     console.log(id)
@@ -55,4 +55,4 @@ function PostId({ match}) {
     )
 }
 
-export default PostId
+export default LinkId

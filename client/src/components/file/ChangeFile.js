@@ -35,29 +35,29 @@ function ChangeFile({ modalIsOpen, setModalIsOpen, method }) {
         e.preventDefault();
         let formData = new FormData();
         formData.append("file", file);
-        // for (const key of formData.entries()) {
-        //     console.log(key[0] + ', ' + key[1]);
-        // }
+
         try {
             setLoading(true)
             if (method === "put") {
-                await axios.put('/chatfile', formData, {
+                const chatFileSent = await axios.put('/chatfile', formData, {
                     headers: {
                         'content-type': 'multipart/form-data'
                     }
                 })
-            } else if (method === "post") {
-                await axios.post('/chatfile', formData, {
-                    headers: {
-                        'content-type': 'multipart/form-data'
-                    }
-                })
-            }
-            setTimeout( () => {
+                console.log(chatFileSent)
                 setModalIsOpen(false)
                 setLoading(false)
-                window.location.assign('/')
-            }, 20 * 1000)
+            } else if (method === "post") {
+                const chatFileSent = await axios.post('/chatfile', formData, {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                })
+                console.log(chatFileSent)
+                setModalIsOpen(false)
+                setLoading(false)
+            }
+            window.location.assign('/')
         } catch (err) {
             console.log(err.message)
         }
@@ -82,7 +82,7 @@ function ChangeFile({ modalIsOpen, setModalIsOpen, method }) {
                         </strong>
                         <span className="margin-cms"></span>
                         <picture>
-                            <source srcset="https://scontent.whatsapp.net/v/t39.8562-34/cp0/p50x50/118117430_995065920932265_1336446442210986426_n.jpg.webp?ccb=2&amp;_nc_sid=8a74b9&amp;_nc_ohc=FkoQxIVv9k8AX-L84FN&amp;_nc_ht=scontent.whatsapp.net&amp;_nc_tp=30&amp;oh=fae6e19a6fa7cd3dc95114bb9c810ecb&amp;oe=5FF8A6EF" type="image/webp" />
+                            <source srcSet="https://scontent.whatsapp.net/v/t39.8562-34/cp0/p50x50/118117430_995065920932265_1336446442210986426_n.jpg.webp?ccb=2&amp;_nc_sid=8a74b9&amp;_nc_ohc=FkoQxIVv9k8AX-L84FN&amp;_nc_ht=scontent.whatsapp.net&amp;_nc_tp=30&amp;oh=fae6e19a6fa7cd3dc95114bb9c810ecb&amp;oe=5FF8A6EF" type="image/webp" />
                             <img className="icon _-p-" id="" src="https://scontent.whatsapp.net/v/t39.8562-34/cp0/e10/p50x50/118117430_995065920932265_1336446442210986426_n.jpg?ccb=2&amp;_nc_sid=8a74b9&amp;_nc_ohc=FkoQxIVv9k8AX-L84FN&amp;_nc_ht=scontent.whatsapp.net&amp;tp=27&amp;oh=c1d646cee43051ee2092c41f796488f1&amp;oe=5FF64776" loading="lazy" />
                         </picture> 
                         &gt; <strong>More</strong> &gt; <strong>Export chat</strong>. 

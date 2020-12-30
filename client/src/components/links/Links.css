@@ -12,7 +12,8 @@
 }
 .options {
     display: flex;
-    justify-content: space-around;  
+    justify-content: space-around;
+    margin: 2%;  
 }
 .options h2 {
     cursor: pointer;
@@ -24,21 +25,29 @@
     transition: 800ms;
 }
 .linkAnchor:hover {
-    color: blue;
+    color: black;
 }
 .chosen {
-    /* color: #25D366; */
+    color: #25D366;
     font-size: 220%;
+    font-weight: 900;
     text-decoration: underline;
     transition: 1s;
 }
 .authorLink {
     font-family: 'Varela Round', sans-serif;
     font-weight: 600;
+    max-width: 20%;
+    text-align: right;
 }
 .dateLink {
     font-family: 'Varela Round', sans-serif;
     font-weight: 600;
+    max-width: 20%;
+    text-align: left;
+}
+.linkAtLinkDiv {
+    max-width: 60%;
 }
 .linkLinkPage {
     margin-left: 10px;
@@ -48,4 +57,15 @@
     font-size: 180%;
     text-decoration: underline;
     font-family: 'Varela Round', sans-serif;
+}
+.domainName {
+    font-size: 180%;
+    cursor: pointer;
+}
+.loadingDiv {
+    border: 1px solid #25D366;
+    width: 50%;
+    margin: 0 auto;
+    padding: 1%;
+    font-family: 'Bebas Neue', cursive;
 }

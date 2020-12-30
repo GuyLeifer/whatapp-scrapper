@@ -1,4 +1,4 @@
-.navbar {
+.Navbar {
     display:flex;
     justify-content: space-around;
     align-items: center;
@@ -12,4 +12,5 @@
     background-color: white;
     border-radius: 50%;
     margin: 20%;
+    cursor: pointer;
 }

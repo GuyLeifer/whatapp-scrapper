@@ -27,3 +27,10 @@
 .authorsChartH2 {
     font-family: 'Bebas Neue', cursive;
 }
+.loadingDiv {
+    border: 1px solid #25D366;
+    width: 50%;
+    margin: 0 auto;
+    padding: 1%;
+    font-family: 'Bebas Neue', cursive;
+}

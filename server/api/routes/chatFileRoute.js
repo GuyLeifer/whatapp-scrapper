@@ -42,8 +42,7 @@ router.post('/', upload.single('file'), async (req, res) => {
     try {
         fs.writeFileSync('./_chat.txt', fs.readFileSync(formData.path, 'utf8'), 'utf8');
         await Link.remove({});
-        scraper();
-        res.send("Chat Uploaded Successfully")
+        scraper().then((response) => res.send(response));
     } catch (err) {
         res.send(err.message)
     }
@@ -54,8 +53,8 @@ router.put('/', upload.single('file'), async (req, res) => {
     try {
         fs.writeFileSync('./_chat.txt', fs.readFileSync(formData.path, 'utf8'), 'utf8');
         await Link.remove({});
-        scraper();
-        res.send("Chat Exchanged Successfully")
+        const result = await scraper()
+        res.send(result)
     } catch (err) {
         res.send(err.message)
     }

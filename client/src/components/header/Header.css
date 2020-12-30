@@ -1,18 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@800&display=swap');
-.header {
-    text-align: center;
+.Header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration-line: underline;
-    font-size: 150%;
     color: #25D366;
     font-family: 'BioRhyme', serif;
+    margin:2%;
+}
+.Header h1 {
+    font-size: 400%;
 }
 .whatsappIcon {
     height: 80px;
     margin: 20px;
-    /* border-radius: 50%; */
-}
-.header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
