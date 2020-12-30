@@ -43,9 +43,8 @@ function Dashboard() {
 
             setLoading(false)            
         })()
-    }, [])
+    }, [modalExchangeChatIsOpen, modalUploadChatIsOpen])
 
-    // let history = useHistory();
 
     const changeChat = () => {
         setModalExchangeChatIsOpen(true)
@@ -57,7 +56,11 @@ function Dashboard() {
     return (
         <>
             { loading ?
-                <h2>Loading ...</h2>
+                <div className="loadingDiv">
+                    <h2>Loading ...</h2>
+                    <h3>Proccessing Statistics of the Chat</h3>
+                    <h4>(it might take a moment)</h4>
+                </div>
             : 
                 chatFileExists ?
                     <div className="dashboard">

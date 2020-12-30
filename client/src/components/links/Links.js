@@ -96,9 +96,9 @@ function Links() {
                     linksByDates.map(link => ( 
                         <div className="linkDiv">
                             <div className="dateLink">{link.date.slice(0, 10)}</div>
-                            <div>
-                                <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
-                                <Link to={`/links/${link._id}`} className="linkLinkPage">(Go To Link Page)</Link>
+                            <div className="linkAtLinkDiv">
+                                <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0].slice(0,48)}...</a>
+                                <Link to={`/link/${link._id}`} className="linkLinkPage">(Go To Link Page)</Link>
                             </div>
                             <div className="authorLink">{link.author}</div>
                         </div> 
@@ -106,9 +106,9 @@ function Links() {
                     linksByAuthors.map(link => ( 
                         <div className="linkDiv">
                             <div className="dateLink">{link.date.slice(0, 10)}</div>
-                            <div>
-                                <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
-                                <Link to={`/links/${link._id}`} className="linkLinkPage">(Go To Link Page)</Link>
+                            <div className="linkAtLinkDiv">
+                                <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0].slice(0,48)}...</a>
+                                <Link to={`/link/${link._id}`} className="linkLinkPage">(Go To Link Page)</Link>
                             </div>
                             <div className="authorLink">{link.author}</div>
                         </div>                    
@@ -120,9 +120,9 @@ function Links() {
                             {domain.ids.map(link => (
                                 <div className="linkDiv">
                                 <div className="dateLink">{link.date.slice(0, 10)}</div>
-                                <div>
-                                    <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0]}</a>
-                                    <Link to={`/links/${link._id}`} className="linkLinkPage">(Go To Link Page)</Link>
+                                <div className="linkAtLinkDiv">
+                                    <a className="linkAnchor" href={link.links[0]} target="blank">{link.links[0].slice(0,48)}...</a>
+                                    <Link to={`/link/${link._id}`} className="linkLinkPage">(Go To Link Page)</Link>
                                 </div>
                                 <div className="authorLink">{link.author}</div>
                             </div> 
@@ -133,7 +133,12 @@ function Links() {
             : <></>
             }
                 </div>
-            : <h2>Loading ...</h2>
+            : 
+                <div className="loadingDiv">
+                    <h2>Loading ...</h2>
+                    <h3>Proccessing the Links of the Chat</h3>
+                    <h4>(it might take a moment)</h4>
+                </div>
             }
             
         </>

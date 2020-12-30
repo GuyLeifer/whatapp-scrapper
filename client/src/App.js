@@ -29,7 +29,7 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/" component={Dashboard} />
             <PrivateRoute exact path="/links" component={Links} />
-            <PrivateRoute exact path="/links/:id" component={LinkId} />
+            <PrivateRoute exact path="/link/:id" component={LinkId} />
             <Route exact path="/about" component={About} />
             <Container
                 className="d-flex align-items-center justify-content-center"

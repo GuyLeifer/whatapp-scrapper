@@ -25,7 +25,7 @@
     transition: 800ms;
 }
 .linkAnchor:hover {
-    color: blue;
+    color: black;
 }
 .chosen {
     color: #25D366;
@@ -37,10 +37,17 @@
 .authorLink {
     font-family: 'Varela Round', sans-serif;
     font-weight: 600;
+    max-width: 20%;
+    text-align: right;
 }
 .dateLink {
     font-family: 'Varela Round', sans-serif;
     font-weight: 600;
+    max-width: 20%;
+    text-align: left;
+}
+.linkAtLinkDiv {
+    max-width: 60%;
 }
 .linkLinkPage {
     margin-left: 10px;
@@ -54,4 +61,11 @@
 .domainName {
     font-size: 180%;
     cursor: pointer;
+}
+.loadingDiv {
+    border: 1px solid #25D366;
+    width: 50%;
+    margin: 0 auto;
+    padding: 1%;
+    font-family: 'Bebas Neue', cursive;
 }

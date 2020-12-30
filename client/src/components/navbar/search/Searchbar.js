@@ -29,7 +29,7 @@ function Searchbar() {
         }
     }
     const goToPage = (id) => {
-        const link = `/links/${id}`;
+        const link = `/link/${id}`;
         window.location.href = link;
     }
 
@@ -39,6 +39,7 @@ function Searchbar() {
             <input 
                 id="search"
                 type="search" 
+                placeholder="Search For Link..."
                 onChange={(e) => changeHandler(e)}
             />
             <div className="optionsSearch">

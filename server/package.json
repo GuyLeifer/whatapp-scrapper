@@ -18,7 +18,7 @@
     "mongoose": "^5.11.4",
     "multer": "^1.4.2",
     "puppeteer": "^5.5.0",
-    "whatsapp-chat-parser": "^3.0.2"
+    "whatsapp-chat-parser-alt": "^3.4.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
